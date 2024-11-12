@@ -1,0 +1,55 @@
+MODERADOR (CRUD) 'Requiere iniciar sesion con rol MODERATOR'
+
+Listar usuarios     (GET):     https://botmila-api.herokuapp.com/botmilaAPI/moderator/list-users
+Registrar Usuarios  (POST):    https://botmila-api.herokuapp.com/botmilaAPI/moderator/register-users
+Eliminar Usuarios   (DELETE):  https://botmila-api.herokuapp.com/botmilaAPI/moderator/delete-user/(:id)
+Editar Usuarios     (PUT):     https://botmila-api.herokuapp.com/botmilaAPI/moderator/edit-user/(:id)
+
+
+HORAS (CRUD) 'Requiere iniciar sesion con rol MODERATOR'
+
+Agregar horas     (POST)   https://botmila-api.herokuapp.com/botmilaAPI/moderator/create-hours
+Listar las horas  (GET)    https://botmila-api.herokuapp.com/botmilaAPI/moderator/list-hours
+
+
+AGENDAR HORAS (CRUD) 'Requiere iniciar sesion con rol MODERATOR'
+
+Agregar (POST)  https://botmila-api.herokuapp.com/botmilaAPI/moderator/schedule-hours
+Listar  (GET)   https://botmila-api.herokuapp.com/botmilaAPI/moderator/schedule-list
+
+
+ADMIN (CRUD) 'Requiere iniciar sesion con rol ADMIN'
+
+Agregar Moderators (POST)   https://botmila-api.herokuapp.com/botmilaAPI/admin/register-moderators
+Listar Usuarios    (GET)    https://botmila-api.herokuapp.com/botmilaAPI/admin/list-users
+Eliminar Usuarios  (DELETE) https://botmila-api.herokuapp.com/botmilaAPI/admin/delete-users/:id
+Editar Usuarios    (PUT)    https://botmila-api.herokuapp.com/botmilaAPI/admin/edit-users/:id
+
+
+CRUD OCUPACIONES
+
+Crear Ocupaciones  (POST) https://botmila-api.herokuapp.com/botmilaAPI/moderator/create-ocupations
+Listar Ocupaciones (GET)  https://botmila-api.herokuapp.com/botmilaAPI/moderator/list-ocupations
+
+
+CRUD ORGANIZACIONES
+
+Listar Organizacion (GET)  https://botmila-api.herokuapp.com/botmilaAPI/moderator/create-organization
+
+
+WEBPAY
+
+Pagar   (GET)  https://botmila-api.herokuapp.com/botmilaAPI/webpay/payment
+Commit  (POST) https://botmila-api.herokuapp.com/botmilaAPI/webpay/commit
+Status  (POST) https://botmila-api.herokuapp.com/botmilaAPI/webpay/status
+
+
+Data Users 'Autenticado'
+
+(GET) https://botmila-api.herokuapp.com/botmilaAPI/dataUser
+
+
+CRUD SERVICIOS
+
+Agregar Servicios   (POST)  https://botmila-api.herokuapp.com/botmilaAPI/moderator/create-service
+Listar Servicios    (GET)   https://botmila-api.herokuapp.com/botmilaAPI/moderator/list-service
