@@ -1,12 +1,13 @@
 import { WSP_MSG_LIST } from "../../api/axios";
 
-export const shceduledHours = ( credentials ) => {
+export const shceduledHours = async ( credentials ) => {
 
   /**
    * TODO: Filtros
    * El filtro debe ver cuantas clases tiene el usuario, si pasan X cantidad
    * el usuario no puede agendar mas clases.
    */
+
   const header_data = {
     titulo: "Clases", cuerpo: "Con el botón _Tomar clases_ podrás tomar clases que estén libres",
     footer: "{{name_org}}", button: "Tomar clases"
