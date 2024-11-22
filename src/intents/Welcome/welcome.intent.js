@@ -1,16 +1,15 @@
-import { WSP_MSG_BUTTONS } from "../../api/axios";
+import { Buttons_response } from "../../imports/wsp/wsp.imports";
 
-export const welcome = async( credentials ) => {
-
+export const welcome = ( credentials, emoji ) => {
   const array = [];
+
   array.push({
-    text: "*Bienvenido/a*\n\n"+
-    "¿En qué te puedo ayudar?",
+    text: "Hol@, ¿Qué deseas hacer?",
     buttons: [{
       type: "reply",
       reply: {
-        id:"AgendarClases",
-        title: "Agendar clases"
+        id:"TomarClases",
+        title: "Tomar clases"
       }
     },{
       type: "reply",
@@ -21,5 +20,5 @@ export const welcome = async( credentials ) => {
     }]
   });
 
-  WSP_MSG_BUTTONS( credentials.phone_number_id, credentials.from, array );
+  Buttons_response ( credentials.phone_number_id, credentials.from, array );
 }

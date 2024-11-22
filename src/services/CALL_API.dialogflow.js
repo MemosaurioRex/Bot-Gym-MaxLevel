@@ -1,36 +1,25 @@
-import { WSP_MSG, WSP_MSG_READ }                  from "../api/axios";
-import { sessionClosed, textQuery } from "../bot/config/config";
-import { showClass } from "../intents/ShowClass/showClass.intent";
-import { deleteClass } from "../intents/DeleteClass/deleteClass.intent";
-import { welcome } from "../intents/Welcome/welcome.intent";
-import { shceduledHours } from "../intents/ScheduledHours/scheduledHours.intent";
-import { getClassId } from "../intents/ShowClass/GetClassId/getClassId.intent";
-import { getClassIdDelete } from "../intents/DeleteClass/GetClassIdForDelete/getClassForDelete.intent";
+
+import { Message_read } from "../imports/wsp/wsp.imports";
+import { Text_query } from "../imports/dialogflow/dialogflow.imports";
+import { Opcion_mes, Welcome } from "../imports/intents/intents.import";
 
 export async function DF_CALL ( credentials, from ) {
 
-  var data = await textQuery ( credentials.msg_body, from );
+  var data = await Text_query ( credentials.msg_body, from );
   if ( from === "56941802987" ) {
-    WSP_MSG_READ ( credentials.phone_number_id, credentials.msg_id );
+
+    Message_read ( credentials.phone_number_id, credentials.msg_id );
     console.log( data.action, from );
+
     switch ( data.action ) {
-      case "welcome.action":
-        welcome ( credentials );
+      case "Welcome.action":
+        Welcome ( credentials, "👋🏻" );
       break;
 
-      case "ShowClasses.action":
-        shceduledHours ( credentials );
-      break;
-      case "GetClassId.action":
-        getClassId ( credentials, data );
+      case "Mostrar.Opcion.Meses.Consultar.action":
+        Opcion_mes ( credentials, "📅" );
       break;
 
-      case "DeleteMyClasses.action":
-        deleteClass ( credentials );
-      break;
-      case "GetClassIdForDelete.action":
-        getClassIdDelete ( credentials, data );
-      break;
     };
   };
 
