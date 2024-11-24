@@ -1,6 +1,12 @@
-import { Buttons_response } from "../../imports/wsp/wsp.imports";
+import { Buttons_response, Wsp_reaction } from "../../imports/wsp/wsp.imports";
 
 export const welcome = ( credentials, emoji ) => {
+  
+  const phone_number_id = credentials.phone_number_id;
+  const from = credentials.from;
+  const msg_id = credentials.msg_id;
+
+  Wsp_reaction ( phone_number_id, from, msg_id, emoji );
   const array = [];
 
   array.push({

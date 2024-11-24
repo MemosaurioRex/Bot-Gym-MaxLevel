@@ -1,7 +1,10 @@
 
 import { Message_read } from "../imports/wsp/wsp.imports";
 import { Text_query } from "../imports/dialogflow/dialogflow.imports";
-import { Opcion_mes, Welcome } from "../imports/intents/intents.import";
+import { Welcome,
+  Month_option,
+  GMS_dates
+} from "../imports/intents/intents.import";
 
 export async function DF_CALL ( credentials, from ) {
 
@@ -17,7 +20,10 @@ export async function DF_CALL ( credentials, from ) {
       break;
 
       case "Mostrar.Opcion.Meses.Consultar.action":
-        Opcion_mes ( credentials, "📅" );
+        Month_option ( credentials, "📅" );
+      break;
+      case "Mostrar.Fechas.Semanas.Mes.action":
+        GMS_dates ( credentials, data, "🗓️" );
       break;
 
     };

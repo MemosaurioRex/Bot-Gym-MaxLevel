@@ -1,15 +1,13 @@
-import { WSP_MSG_REACTION } from "../../api/axios";
 
-/**
- * TODO: pasar el intent de reaction al import
- */
-export const opcionMeses = ( credentials, emoji ) => {
+import { Buttons_response, Wsp_reaction } from "../../imports/wsp/wsp.imports";
+
+export const monthOption = ( credentials, emoji ) => {
   
   const phone_number_id = credentials.phone_number_id;
   const from = credentials.from;
   const msg_id = credentials.msg_id;
 
-  WSP_MSG_REACTION ( phone_number_id, from, msg_id, emoji );
+  Wsp_reaction ( phone_number_id, from, msg_id, emoji );
 
   const array = [];
 
@@ -18,17 +16,17 @@ export const opcionMeses = ( credentials, emoji ) => {
     buttons: [{
       type: "reply",
       reply: {
-        id:"MesActual",
+        id: 1,
         title: "Mes actual"
       }
     },{
       type: "reply",
       reply: {
-        id: "MesProximo",
+        id: 2,
         title: "Mes próximo"
       }
     }]
   });
 
-  WSP_MSG_BUTTONS ( credentials.phone_number_id, credentials.from, array );
+  Buttons_response ( credentials.phone_number_id, credentials.from, array );
 };
