@@ -7,9 +7,8 @@ export const get_month = ( number ) => {
   if ( number === 1 ) {
     const difference = 3;
     const type = 'hours';
-    const start_data = 'day';
 
-    const date_month_utc = moment().utc().subtract(difference, type).startOf(start_data).format();
+    const date_month_utc = moment().utc().subtract(difference, type).format();
     return date_month_utc;
   }
 

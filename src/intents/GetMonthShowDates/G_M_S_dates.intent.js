@@ -1,5 +1,7 @@
 
-import { Get_moth } from "../../imports/moment/moment.import";
+import { Get_moth, 
+  get_range_week_firstOption 
+} from "../../imports/moment/moment.import";
 
 export const G_M_S_dates = ( credentials, data, emoji ) => {
   
@@ -7,7 +9,6 @@ export const G_M_S_dates = ( credentials, data, emoji ) => {
   
   const type_month =  Get_moth ( get_month );
 
-  console.log( type_month );
-  
-
+  get_range_week_firstOption ( type_month );
+  // console.log(test);
 }
