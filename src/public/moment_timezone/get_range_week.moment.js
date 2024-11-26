@@ -26,18 +26,18 @@ export const get_range_week_firstOption = ( date ) => {
     if ( example.toString() === current_month.toString() ) {
       const fecha = moment( date ).utc().add( index, "weeks" ).format();
       // array.push( moment( date ).utc().add( index, "weeks" ).format() );
-      array.push(fecha);
-    }
+      array.push({index,fecha});
+    };
 
     if ( example.toString() === next_month.toString() ) {
       const fecha = moment( date ).utc().add( index, "weeks" ).format();
       // array.push( moment( date ).utc().add( index, "weeks" ).format() );
-      array.push(fecha);
+      array.push({index,fecha});
       index = 19;
-    }
+    };
     index++;
-  }
-
-  return array;
+  };
+  console.log( array );
+  // return array;
   
-}
+};
