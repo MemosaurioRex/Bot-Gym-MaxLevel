@@ -14,7 +14,11 @@ const classes = new Schema({
     startDate: Date,
     endDate: Date,
     status: String,
-    day: String
+    day: String,
+    users: {
+        type: mongoose.Schema.Types.Array,
+        ref: "UserCreates"
+    }
 }, {
     timestamps: true,
     versionKey: false,

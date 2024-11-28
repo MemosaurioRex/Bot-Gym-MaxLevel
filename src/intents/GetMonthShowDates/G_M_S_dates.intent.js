@@ -33,7 +33,7 @@ export const G_M_S_dates = async ( credentials, data, emoji ) => {
       description: element.index
     });
   });
-  console.log(list_data);
+
   if ( datos_fecha.length > 10 ) return Wsp_msg ( p_n_id, process.env.MSG_LIST_ERR, from );
 
   return Wsp_list ( credentials.phone_number_id, credentials.from, header_data, list_data );
