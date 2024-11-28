@@ -3,7 +3,8 @@ import { Message_read } from "../imports/wsp/wsp.imports";
 import { Text_query } from "../imports/dialogflow/dialogflow.imports";
 import { Welcome,
   Month_option,
-  GMS_dates
+  GMS_dates,
+  GetRangeSearchClassRange
 } from "../imports/intents/intents.import";
 
 export async function DF_CALL ( credentials, from ) {
@@ -24,6 +25,9 @@ export async function DF_CALL ( credentials, from ) {
       break;
       case "Mostrar.Fechas.Semanas.Mes.action":
         GMS_dates ( credentials, data, "🗓️" );
+      break;
+      case "Recibe.Fecha.Busca.Clases.Por.Rango.action":
+        GetRangeSearchClassRange ( data );
       break;
 
     };
