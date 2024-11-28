@@ -20,10 +20,10 @@ export const G_M_S_dates = async ( credentials, data, emoji ) => {
   const list_data = [];
 
   const header_data = {
-    titulo: "Canchas", 
-    cuerpo: "Pulsa en _Ver canchas_ para desplegar la lista con las canchas disponibles",
+    titulo: "Semana", 
+    cuerpo: "Pulsa en _Ver semanas_ para desplegar la lista con las semanas que puedes consultar por clases",
     footer: process.env.NOMBRE_ORG, 
-    button: "Ver canchas"
+    button: "Ver semanas"
   };
 
   datos_fecha.forEach(element => {

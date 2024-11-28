@@ -4,7 +4,8 @@ import { Text_query } from "../imports/dialogflow/dialogflow.imports";
 import { Welcome,
   Month_option,
   GMS_dates,
-  GetRangeSearchClassRange
+  GetRangeSearchClassRange,
+  GetIdClass
 } from "../imports/intents/intents.import";
 
 export async function DF_CALL ( credentials, from ) {
@@ -27,7 +28,10 @@ export async function DF_CALL ( credentials, from ) {
         GMS_dates ( credentials, data, "🗓️" );
       break;
       case "Recibe.Fecha.Busca.Clases.Por.Rango.action":
-        GetRangeSearchClassRange ( data );
+        GetRangeSearchClassRange ( credentials, data );
+      break;
+      case "Recibe.Clase.Para.Confirmarla.action":
+        GetIdClass ( credentials, data );
       break;
 
     };

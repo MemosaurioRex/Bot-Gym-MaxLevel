@@ -5,7 +5,7 @@ const classes = new Schema({
     teacherName: String,
     quotaCount: Number,
     typeClass: {
-        type: mongoose.Schema.Types.String,
+        type: mongoose.Schema.Types.ObjectId,
         ref: "TypeClasses"
     },
     start: String,
@@ -13,7 +13,7 @@ const classes = new Schema({
     times: String,
     startDate: Date,
     endDate: Date,
-    status: String,
+    status: Boolean,
     day: String,
     users: {
         type: mongoose.Schema.Types.Array,
