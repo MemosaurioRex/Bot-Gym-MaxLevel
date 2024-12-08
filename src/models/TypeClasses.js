@@ -1,4 +1,4 @@
-import { Schema, model } from 'mongoose'
+import { Schema, model } from 'mongoose';
 
 const typeClasses = new Schema({
     name: String,
@@ -8,4 +8,5 @@ const typeClasses = new Schema({
     timestamps: true,
     versionKey: false,
 });
+
 export default model("TypeClasses", typeClasses);

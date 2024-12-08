@@ -1,4 +1,4 @@
-import { Schema, model } from 'mongoose'
+import { Schema, model } from 'mongoose';
 
 const userCreates = new Schema({
   name: String,
@@ -7,9 +7,18 @@ const userCreates = new Schema({
   rut: String,
   address: String,
   status: Boolean,
-  startDate: Date
+  startDate: Date,
+  classes: {
+    type: Schema.Types.Array,
+    ref: "Classes"
+  },
+  plan: {
+    type: Schema.Types.ObjectId,
+    ref: "Plans"
+  }
 }, {
     timestamps: true,
     versionKey: false,
 });
+
 export default model("UserCreates", userCreates);

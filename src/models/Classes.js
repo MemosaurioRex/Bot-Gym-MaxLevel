@@ -1,26 +1,20 @@
-import mongoose, { Schema, model } from 'mongoose'
+import { Schema, model } from 'mongoose';
 
 const classes = new Schema({
+    nameClass: String,
     date: Date,
     teacherName: String,
-    quotaCount: Number,
-    typeClass: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "TypeClasses"
-    },
     start: String,
     end: String,
     times: String,
     startDate: Date,
     endDate: Date,
     status: Boolean,
+    quotaCount: Number,
     day: String,
-    users: {
-        type: mongoose.Schema.Types.Array,
-        ref: "UserCreates"
-    }
 }, {
     timestamps: true,
     versionKey: false,
 });
-export default model("classes", classes);
+
+export default model("Classes", classes);
