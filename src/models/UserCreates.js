@@ -15,6 +15,10 @@ const userCreates = new Schema({
   plan: {
     type: Schema.Types.ObjectId,
     ref: "Plans"
+  },
+  quotas: {
+    type: Schema.Types.Array,
+    ref: "Quotas"
   }
 }, {
     timestamps: true,

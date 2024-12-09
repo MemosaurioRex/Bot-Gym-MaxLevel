@@ -35,6 +35,7 @@ export const welcome = async ( credentials, emoji ) => {
 
   Wsp_reaction ( phone_number_id, from, msg_id, emoji );
 
+  // Si el total de clases son igual al cupo ya no puede agendar mas.
   if ( user_classes == get_classes_plan_user ) {
 
     array.push({
@@ -47,9 +48,11 @@ export const welcome = async ( credentials, emoji ) => {
         }
       }]
     });
+
   };
 
-  if ( user_classes.length >= 1 && user_classes < get_classes_plan_user ) {
+  // Si el numero de clases es mayor o igual a 1 y menor al total del plan.
+  if ( user_classes >= 1 && user_classes < get_classes_plan_user ) {
 
     array.push({
       text: welcome_text,
@@ -70,7 +73,8 @@ export const welcome = async ( credentials, emoji ) => {
 
   };
 
-  if ( user_classes.length == undefined ) {
+  // Si las clases son 0 es que el usuario no tiene clases por ende no puede cancelar.
+  if ( user_classes == 0 ) {
     
     array.push({
       text: welcome_text,
@@ -85,6 +89,10 @@ export const welcome = async ( credentials, emoji ) => {
   
   };
 
-  Buttons_response ( phone_number_id, from, array );
+  if ( array.length == 1 ) {
+    
+    Buttons_response ( phone_number_id, from, array );
+
+  };
   
 };

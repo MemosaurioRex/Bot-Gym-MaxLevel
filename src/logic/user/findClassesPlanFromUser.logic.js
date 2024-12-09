@@ -6,7 +6,9 @@ export const findClassesPlanFromUser  = async ( phone_number ) => {
   
   const data_user = await UserModel.find({ phone: `+${phone_number}` })
   .populate("plan");
+
+  const return_number = data_user[0].plan.totalClass
   
-  return data_user[0].plan.totalClass;
+  return parseInt(return_number);
 
 };

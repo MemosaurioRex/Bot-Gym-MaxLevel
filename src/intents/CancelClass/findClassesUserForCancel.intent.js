@@ -1,6 +1,6 @@
 
 import UserModel    from "../../models/UserCreates";
-import { Wsp_list } from "../../imports/wsp/wsp.imports";
+import { Wsp_list, Wsp_msg } from "../../imports/wsp/wsp.imports";
 
 import "../../models/Classes";
 
@@ -15,14 +15,15 @@ export const findClassUserForCancel = async ( credentials ) => {
 
   const count_class_user = find_classes_user[0].classes;
 
-  const title  = process.env.MSG_CANCEL_TITLE;
-  const body   = process.env.MSG_CANCEL_BODY;
-  const button = process.env.MSG_CANCEL_BUTTON;
-  const footer = process.env.NOMBRE_ORG;
+  const title    = process.env.MSG_CANCEL_TITLE;
+  const body     = process.env.MSG_CANCEL_BODY;
+  const button   = process.env.MSG_CANCEL_BUTTON;
+  const footer   = process.env.NOMBRE_ORG;
+  const no_class = process.env.MSG_CANCEL_NOCLASS;
 
   const header_data = {
-    title: title, 
-    body: body,
+    titulo: title, 
+    cuerpo: body,
     footer: footer, 
     button: button
   };
@@ -45,6 +46,12 @@ export const findClassUserForCancel = async ( credentials ) => {
 
   };
 
-  Wsp_list ( phone_number_id, number_user, header_data, classes_user );
+  if ( count_class_user.length == 0 ) {
+
+    return Wsp_msg ( phone_number_id, no_class, number_user );
+
+  };
+
+  return Wsp_list ( phone_number_id, number_user, header_data, classes_user );
 
 };
