@@ -10,8 +10,13 @@
    * 
    */
 
-import { Buttons_response, Wsp_reaction } from "../../imports/wsp/wsp.imports";
-import { CountUserClasses, FindUserByNumber, FindClassesPlanFromUser } from "../../imports/logic/logic.import";
+import { Buttons_response, 
+  Wsp_reaction 
+} from "../../imports/wsp/wsp.imports";
+
+import { CountUserClasses, 
+  FindClassesPlanFromUser 
+} from "../../imports/logic/logic.import";
 
 export const welcome = async ( credentials, emoji ) => {
   
@@ -24,17 +29,21 @@ export const welcome = async ( credentials, emoji ) => {
   const user_classes          = await CountUserClasses ( from );
   const get_classes_plan_user = await FindClassesPlanFromUser ( from );
 
+  const welcome_text          = process.env.MSG_WELCOME_TEXT;
+  const welcome_title_classes = process.env.MSG_WELCOME_TITLE_CLASSES;
+  const welcome_title_cancel  = process.env.MSG_WELCOME_TITLE_CANCEL;
+
   Wsp_reaction ( phone_number_id, from, msg_id, emoji );
 
   if ( user_classes == get_classes_plan_user ) {
 
     array.push({
-      text: "Hol@, ¿Qué deseas hacer?",
+      text: welcome_text,
       buttons: [{
         type: "reply",
         reply: {
           id: "CancelarClases",
-          title: "Cancelar clases"
+          title: welcome_title_cancel
         }
       }]
     });
@@ -43,18 +52,18 @@ export const welcome = async ( credentials, emoji ) => {
   if ( user_classes.length >= 1 && user_classes < get_classes_plan_user ) {
 
     array.push({
-      text: "Hol@, ¿Qué deseas hacer?",
+      text: welcome_text,
       buttons: [{
         type: "reply",
         reply: {
           id:"TomarClases",
-          title: "Tomar clases"
+          title: welcome_title_classes
         }
       },{
         type: "reply",
         reply: {
           id: "CancelarClases",
-          title: "Cancelar clases"
+          title: welcome_title_cancel
         }
       }]
     });
@@ -64,17 +73,17 @@ export const welcome = async ( credentials, emoji ) => {
   if ( user_classes.length == undefined ) {
     
     array.push({
-      text: "Hol@, ¿Qué deseas hacer?",
+      text: welcome_text,
       buttons: [{
         type: "reply",
         reply: {
           id:"TomarClases",
-          title: "Tomar clases"
+          title: welcome_title_classes
         }
       }]
     });
-    
-  }
+  
+  };
 
   Buttons_response ( phone_number_id, from, array );
   

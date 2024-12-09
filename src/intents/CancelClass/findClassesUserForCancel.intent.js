@@ -1,7 +1,8 @@
 
-import UserModel from "../../models/UserCreates";
-import "../../models/Classes";
+import UserModel    from "../../models/UserCreates";
 import { Wsp_list } from "../../imports/wsp/wsp.imports";
+
+import "../../models/Classes";
 
 export const findClassUserForCancel = async ( credentials ) => {
   
@@ -14,12 +15,17 @@ export const findClassUserForCancel = async ( credentials ) => {
 
   const count_class_user = find_classes_user[0].classes;
 
+  const title  = process.env.MSG_CANCEL_TITLE;
+  const body   = process.env.MSG_CANCEL_BODY;
+  const button = process.env.MSG_CANCEL_BUTTON;
+  const footer = process.env.NOMBRE_ORG;
+
   const header_data = {
-    titulo: "Cancelar Horas", 
-    cuerpo: "Con el boton _Cancelar horas_ podrás ver tus clases para poder cancelarlas",
-    footer: process.env.NOMBRE_ORG, 
-    button: "Cancelar horas"
-  }
+    title: title, 
+    body: body,
+    footer: footer, 
+    button: button
+  };
 
   if ( count_class_user.length > 0 ) {
     
