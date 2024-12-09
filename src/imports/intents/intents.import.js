@@ -5,6 +5,7 @@ import { G_M_S_dates as GMS_dates } from "../../intents/GetMonthShowDates/G_M_S_
 import { getDateToSearchClassForRange as GetRangeSearchClassRange } from "../../intents/GetDateToSearchClass/getDateToSearchClassForRange.intent";
 import { getIdClass as GetIdClass } from "../../intents/GetIdClass/getIdClass.intent";
 import { findClassUserForCancel as FindClassUserCancel } from "../../intents/CancelClass/findClassesUserForCancel.intent";
+import { getIdToCancelClass as GetIdToCancelClass } from "../../intents/GetIdToCancelClass/getIdToCancelClass.intent";
 
 export {
   Month_option, 
@@ -12,5 +13,6 @@ export {
   GMS_dates, 
   GetRangeSearchClassRange, 
   GetIdClass,
-  FindClassUserCancel
+  FindClassUserCancel,
+  GetIdToCancelClass
 };

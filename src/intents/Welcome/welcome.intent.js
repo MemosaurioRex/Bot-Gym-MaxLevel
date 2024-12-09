@@ -40,7 +40,7 @@ export const welcome = async ( credentials, emoji ) => {
     });
   };
 
-  if ( user_classes >= 1 && user_classes < get_classes_plan_user ) {
+  if ( user_classes.length >= 1 && user_classes < get_classes_plan_user ) {
 
     array.push({
       text: "Hol@, ¿Qué deseas hacer?",
@@ -60,6 +60,21 @@ export const welcome = async ( credentials, emoji ) => {
     });
 
   };
+
+  if ( user_classes.length == undefined ) {
+    
+    array.push({
+      text: "Hol@, ¿Qué deseas hacer?",
+      buttons: [{
+        type: "reply",
+        reply: {
+          id:"TomarClases",
+          title: "Tomar clases"
+        }
+      }]
+    });
+    
+  }
 
   Buttons_response ( phone_number_id, from, array );
   

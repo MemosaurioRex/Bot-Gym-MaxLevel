@@ -41,8 +41,4 @@ export const findClassUserForCancel = async ( credentials ) => {
 
   Wsp_list ( phone_number_id, number_user, header_data, classes_user );
 
-  // await ClassModel.updateOne(
-  //   { _id: classId }, // Filtro: Documento que quieres modificar
-  //   { $pull: { users: userIdToRemove } } // Operación: Eliminar el ID del array 'users'
-  // );
 };

@@ -10,7 +10,8 @@ import { Welcome,
   GMS_dates,
   GetRangeSearchClassRange,
   GetIdClass,
-  FindClassUserCancel
+  FindClassUserCancel,
+  GetIdToCancelClass
 } from "../imports/intents/intents.import";
 
 export async function DF_CALL ( credentials, from ) {
@@ -56,8 +57,12 @@ export async function DF_CALL ( credentials, from ) {
         break;
   
         // Cancelacion de clases
+        // TODO: Si ingresa al cancelar sin tener clases, agregar otro filtro para que no pase.
         case "Cancelacion.Clases.action":
           FindClassUserCancel ( credentials, data );
+        break;
+        case "Cancela.Clase.Por.Id.action":
+          GetIdToCancelClass ( credentials, data );
         break;
 
       };
