@@ -1,6 +1,6 @@
 
 import { date_to_name_week, get_month, 
-  get_range_week_firstOption 
+  get_range_week 
 } from "../../imports/moment/moment.import";
 
 import { Wsp_list, 
@@ -9,13 +9,12 @@ import { Wsp_list,
 
 export const G_M_S_dates = async ( credentials, data, emoji ) => {
   
-  const get_number_month = data.parameters.fields.Number.numberValue;
+  const get_number_month = data.parameters.fields.select_month.stringValue;
   
   const p_n_id = credentials.phone_number_id;
   const from   = credentials.from;
 
-  const type_month  = get_month ( get_number_month );
-  const datos_fecha = get_range_week_firstOption ( type_month );
+  const datos_fecha = get_range_week ( get_number_month );
 
   const list_data = [];
 
@@ -26,7 +25,7 @@ export const G_M_S_dates = async ( credentials, data, emoji ) => {
     button: "Ver semanas"
   };
 
-  datos_fecha.forEach(element => {
+  datos_fecha.forEach( element => {
     list_data.push({
       id: element.index,
       title: element.index,

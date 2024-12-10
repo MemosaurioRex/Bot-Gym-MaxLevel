@@ -6,25 +6,54 @@ import moment from "moment-timezone";
  * 
  */
 
-export const get_range_week_firstOption = ( date ) => {
+export const get_range_week = ( number_option ) => {
   
   const array = [];
-  const current_date = moment().utc().subtract(3, "hours").format();
 
-  array.push({ index: current_date });
-  
-  for ( let index = 0; index < 200; ) {
+  const number     = parseInt( number_option );
 
-    const edit_date    = moment( date ).utc().add(index, "days").format();
+  if ( number == 1 ) {
 
-    if ( moment(edit_date).utc().format("dddd") === "domingo" )
-    {
+    var month      = moment().utc().subtract( 3, "hours" ).format( "MMMM" );
+    var first_date = moment().utc().subtract( 3, "hours" ).format();
 
-      array.push({ index: moment(edit_date).utc().add(1, "day").format() });
+  };
+
+  if ( number == 2 ) {
+    
+    var month      = moment().utc().subtract( 3, "hours" ).add( 1, "month" ).startOf("month").format( "MMMM" );
+    var first_date = moment().utc().subtract( 3, "hours" ).add( 1, "month" ).startOf("month").format();
+
+  };
+
+  array.push({ index: first_date });
+
+  for ( let index = 1; index < 30; ) {
+
+    if ( number == 1 ) {
+
+      if ( moment( first_date ).add( index, "days" ).utc().format("MMMM") == month && 
+          moment( first_date ).add( index, "days" ).utc().format("dddd") === "lunes" ) {
+
+          const date_edit = moment( first_date ).add( index, "days" ).utc().format();
+
+          array.push( { index: date_edit} );
+
+      };
+
+    };
+
+    if ( number == 2 ) {
       
-      if ( moment(edit_date).utc().format('MMMM') === "diciembre" ) {
-        index = 200;
-      }
+      if ( moment( first_date ).add( index, "days" ).utc().format("MMMM") == month && 
+          moment( first_date ).add( index, "days" ).utc().format("dddd") === "lunes" ) {
+
+        const date_edit = moment( first_date ).add( index, "days" ).utc().format();
+
+        array.push( { index: date_edit} );
+
+      };
+
     };
 
     index++;

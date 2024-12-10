@@ -30,8 +30,9 @@ export async function DF_CALL ( credentials, from ) {
 
   const find_plan_status_user = await FindStatusPlanUser ( user_number );
 
+  // Usuario registrado?
   if ( find_user_register.length == 1 ) {
-
+    //Plan activo?
     if ( find_plan_status_user == true ) {
       
       Message_read ( credentials.phone_number_id, credentials.msg_id );
@@ -57,7 +58,6 @@ export async function DF_CALL ( credentials, from ) {
         break;
   
         // Cancelacion de clases
-        // TODO: Si ingresa al cancelar sin tener clases, agregar otro filtro para que no pase.
         case "Cancelacion.Clases.action":
           FindClassUserCancel ( credentials, data );
         break;
@@ -65,10 +65,17 @@ export async function DF_CALL ( credentials, from ) {
           GetIdToCancelClass ( credentials, data );
         break;
 
+        // Opcion no valida
+        case "input.unknown.action":
+          //
+        break;
+
       };
 
     } else {
+
       Wsp_msg ( phone_number_id, process.env.MSG_EXPIRE_PLAN, user_number );
+
     };
 
   };

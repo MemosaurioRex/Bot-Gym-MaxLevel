@@ -6,7 +6,7 @@ export const getIdClass = async( credentials, data ) => {
   const get_id_class = data.parameters.fields.MongooseIdClass.stringValue;
 
   const status_class_confirm = await Classes.findOne({ _id: get_id_class, status: true });
-  const find_user_id = await UserCreates.findOne({ phone: `+${credentials.from}` });
+  const find_user_id         = await UserCreates.findOne({ phone: `+${credentials.from}` });
   
   const id_class = status_class_confirm._id;
   const id_user  = find_user_id._id;

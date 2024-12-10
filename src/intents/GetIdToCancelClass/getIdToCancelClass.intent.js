@@ -1,3 +1,4 @@
+
 import mongoose from "mongoose";
 
 import UserModel from "../../models/UserCreates";
@@ -22,9 +23,9 @@ export const getIdToCancelClass = async ( credentials, data ) => {
 
     const range_expire = rangeQuota ( 1 );
     addQuotaToUser ( phone_user, range_expire );
+    
   };
 
   return Wsp_msg ( phone_number_id, process.env.MSG_CANCEL_EXIT, phone_user );
 
 };
-// TODO: Al cancelar una clase, agregar un cupo al usuario.
