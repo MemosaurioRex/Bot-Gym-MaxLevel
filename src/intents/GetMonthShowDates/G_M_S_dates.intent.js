@@ -1,7 +1,5 @@
 
-import { date_to_name_week, get_month, 
-  get_range_week 
-} from "../../imports/moment/moment.import";
+import { get_range_week } from "../../imports/moment/moment.import";
 
 import { Wsp_list, 
   Wsp_msg 
@@ -14,15 +12,20 @@ export const G_M_S_dates = async ( credentials, data, emoji ) => {
   const p_n_id = credentials.phone_number_id;
   const from   = credentials.from;
 
+  const list_title  = process.env.MSG_LIST_RANGES_TITLE;
+  const list_body   = process.env.MSG_LIST_RANGES_BODY;
+  const list_footer = process.env.NOMBRE_ORG;
+  const list_button = process.env.MSG_LIST_RANGES_BUTTON;
+
   const datos_fecha = get_range_week ( get_number_month );
 
   const list_data = [];
 
   const header_data = {
-    titulo: "Semana", 
-    cuerpo: "Pulsa en _Ver semanas_ para desplegar la lista con las semanas que puedes consultar por clases",
-    footer: process.env.NOMBRE_ORG, 
-    button: "Ver semanas"
+    titulo: list_title, 
+    cuerpo: list_body,
+    footer: list_footer, 
+    button: list_button
   };
 
   datos_fecha.forEach( element => {

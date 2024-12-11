@@ -1,3 +1,4 @@
+// TODO: Hay que ver si los meses cuentan con horas.
 
 import { Buttons_response, Wsp_reaction } from "../../imports/wsp/wsp.imports";
 
