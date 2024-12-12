@@ -1,13 +1,18 @@
 
-import UserModel from "../../models/UserCreates";
-import "../../models/Plans"
+import { FindUserByNumber } from "../../imports/logic/logic.import";
+import PlanModel from "../../models/Plans";
 
 export const findStatusPlanUser = async ( phone_number ) => {
 
-  const user_data = await UserModel.find({ phone: `+${phone_number}` })
-  .populate("plan");
+  const user_data = await FindUserByNumber ( phone_number );
 
-  if ( user_data.length == 1 ) return user_data[0].plan.status;
-  return false;
+  try {
+    
+    const data_plan = await PlanModel.find({ user: user_data[0]._id });
+
+    if ( data_plan.length == 1 ) return data_plan[0].status;
+    return false;
+
+  } catch ( error ) {};
 
 };

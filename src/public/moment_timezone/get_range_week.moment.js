@@ -1,12 +1,13 @@
 
 import moment from "moment-timezone";
+import ClassesModel from "../../models/Classes";
 
 /**
  * TODO: Mejorar esta logica ya que se detiene el for manualmente.
  * 
  */
 
-export const get_range_week = ( number_option ) => {
+export const get_range_week = async ( number_option ) => {
   
   const array = [];
 
@@ -60,6 +61,33 @@ export const get_range_week = ( number_option ) => {
 
   };
 
-  return array;
+  const filter_ranges = [];
+
+  for ( let index = 0; index < array.length; index++ ) {
+
+    const filter = await ClassesModel.find(
+      { 
+        date: { 
+          $gte: array[index].index,
+          $lte: moment( array[index].index ).utc().endOf( "week" ).format()
+        } 
+      }
+    );
+
+    if ( filter.length > 0 ) {
+      
+      filter_ranges.push( array[index] );
+
+      // console.log('');
+      // console.log( array[index].index );
+      // console.log( moment( array[index].index ).utc().endOf( "week" ).format() );
+      // console.log('');
+      // console.log(filter);
+
+    };
+
+  };
+
+  return filter_ranges;
 
 };

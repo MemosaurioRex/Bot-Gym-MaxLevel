@@ -17,7 +17,7 @@ export const G_M_S_dates = async ( credentials, data, emoji ) => {
   const list_footer = process.env.NOMBRE_ORG;
   const list_button = process.env.MSG_LIST_RANGES_BUTTON;
 
-  const datos_fecha = get_range_week ( get_number_month );
+  const datos_fecha = await get_range_week ( get_number_month );
 
   const list_data = [];
 
@@ -28,16 +28,26 @@ export const G_M_S_dates = async ( credentials, data, emoji ) => {
     button: list_button
   };
 
-  datos_fecha.forEach( element => {
-    list_data.push({
-      id: element.index,
-      title: element.index,
-      description: element.index
+  if ( datos_fecha.length > 0 ) {
+
+    datos_fecha.forEach( element => {
+      list_data.push({
+        id: element.index,
+        title: element.index,
+        description: element.index
+      });
     });
-  });
+  
+    if ( datos_fecha.length > 10 ) return Wsp_msg ( p_n_id, process.env.MSG_LIST_ERR, from );
+  
+    return Wsp_list ( credentials.phone_number_id, credentials.from, header_data, list_data );
 
-  if ( datos_fecha.length > 10 ) return Wsp_msg ( p_n_id, process.env.MSG_LIST_ERR, from );
+  } else {
 
-  return Wsp_list ( credentials.phone_number_id, credentials.from, header_data, list_data );
+    const no_classes = process.env.MSG_NO_CLASSES;
+
+    Wsp_msg ( p_n_id, no_classes, from );
+
+  };
 
 };
