@@ -8,10 +8,10 @@ import { FindStatusPlanUser, FindUserByNumber } from "../imports/logic/logic.imp
 import { Welcome,
   Month_option,
   GMS_dates,
-  GetRangeSearchClassRange,
-  GetIdClass,
+  GetDateSearchClassRange,
+  GetDateToFindClasses,
   FindClassUserCancel,
-  GetIdToCancelClass
+  GetIdToCancelClass,
 } from "../imports/intents/intents.import";
 
 export async function DF_CALL ( credentials, from ) {
@@ -30,9 +30,9 @@ export async function DF_CALL ( credentials, from ) {
 
   const find_plan_status_user = await FindStatusPlanUser ( user_number );
 
-  // Usuario registrado?
+  //? Usuario registrado?
   if ( find_user_register.length == 1 ) {
-    //Plan activo?
+    //? Plan activo?
     if ( find_plan_status_user == true ) {
       
       Message_read ( credentials.phone_number_id, credentials.msg_id );
@@ -43,21 +43,21 @@ export async function DF_CALL ( credentials, from ) {
           Welcome ( credentials, "👋🏻" );
         break;
   
-        // Agendacion de clases
+        //? Agendacion de clases
         case "Mostrar.Opcion.Meses.Consultar.action":
           Month_option ( credentials, "📅" );
         break;
         case "Mostrar.Fechas.Semanas.Mes.action":
           GMS_dates ( credentials, data, "🗓️" );
         break;
-        case "Recibe.Fecha.Busca.Clases.Por.Rango.action":
-          GetRangeSearchClassRange ( credentials, data );
+        case "Recibe.Fecha.Busca.Clases.Filtra.Dias.action":
+          GetDateSearchClassRange ( credentials, data );
         break;
-        case "Recibe.Clase.Para.Confirmarla.action":
-          GetIdClass ( credentials, data );
+        case "Recibe.Dia.Busca.Clases.action":
+          GetDateToFindClasses ( credentials, data );
         break;
   
-        // Cancelacion de clases
+        //? Cancelacion de clases
         case "Cancelacion.Clases.action":
           FindClassUserCancel ( credentials, data );
         break;
@@ -65,7 +65,7 @@ export async function DF_CALL ( credentials, from ) {
           GetIdToCancelClass ( credentials, data );
         break;
 
-        // Opcion no valida
+        //? Opcion no valida
         case "input.unknown.action":
           //
         break;

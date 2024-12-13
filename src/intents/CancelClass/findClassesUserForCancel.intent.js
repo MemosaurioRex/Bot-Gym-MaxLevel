@@ -11,15 +11,16 @@ export const findClassUserForCancel = async ( credentials ) => {
   const number_user     = credentials.from;
   const phone_number_id = credentials.phone_number_id;
 
-  const find_classes_user = await UserModel.find({ phone: `+${ number_user }` }).populate("classes");
+  const find_classes_user = await UserModel.find({ phone: `+${ number_user }` }).populate("classes").limit( 10 );
 
   const count_class_user = find_classes_user[0].classes;
 
-  const title    = process.env.MSG_CANCEL_TITLE;
-  const body     = process.env.MSG_CANCEL_BODY;
-  const button   = process.env.MSG_CANCEL_BUTTON;
-  const footer   = process.env.NOMBRE_ORG;
-  const no_class = process.env.MSG_CANCEL_NOCLASS;
+  const title          = process.env.MSG_CANCEL_TITLE;
+  const body           = process.env.MSG_CANCEL_BODY;
+  const button         = process.env.MSG_CANCEL_BUTTON;
+  const footer         = process.env.NOMBRE_ORG;
+  const no_class       = process.env.MSG_CANCEL_NOCLASS;
+  const limit_exceeded = process.env.MSG_CLASSES_USER_LIMIT;
 
   const header_data = {
     titulo: title, 
@@ -32,15 +33,24 @@ export const findClassUserForCancel = async ( credentials ) => {
     
     find_classes_user.forEach( user => {
 
-      user.classes.forEach( classes => {
+      if ( user.classes.length > 10 ) {
+        
+        return Wsp_msg ( phone_number_id, limit_exceeded, number_user );
 
-        classes_user.push({
-          id: classes._id,
-          title: classes.nameClass,
-          description: classes.date
+      } else {
+
+        user.classes.forEach( classes => {
+
+          classes_user.push({
+            id: classes._id,
+            title: classes.nameClass,
+            description: classes.date
+          });
+  
         });
 
-      });
+      }
+      
 
     });
 

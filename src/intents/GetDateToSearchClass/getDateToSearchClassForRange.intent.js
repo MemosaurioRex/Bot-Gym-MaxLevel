@@ -1,5 +1,7 @@
+
 import moment from "moment-timezone";
 moment.locale('es');
+
 import Classes from "../../models/Classes";
 
 import "../../models/UserCreates";
@@ -41,28 +43,13 @@ export const getDateToSearchClassForRange = async( credentials, data ) => {
   const first_date_getting = moment( date_getting ).add( 3, "hours" ).utc().format();
   const last_date_getting  = array.map( index => index.date );
   
-  // console.log( first_date_getting );
-  // console.log( last_date_getting );
-
   const data_classes = await Classes.find(
     { date: { $gte: first_date_getting, $lte: last_date_getting[0] } }
   );
-  // console.log("");
-  // console.log(data_classes);
-  // console.log("");
-  
+
   data_classes.forEach( hours => {
 
-    list_element.push({ 
-
-      _id: hours._id.toString(),
-      name_class: hours.nameClass,
-      day_name: date_to_name_week( hours.date ),
-      range: hours.times,
-      teacher_name: hours.teacherName,
-      date_day: hours.date
-
-    });
+    list_element.push(hours.date);
 
   });
 
@@ -72,25 +59,36 @@ export const getDateToSearchClassForRange = async( credentials, data ) => {
   const list_filter = [];
 
   if ( list_element.length > 0 ) {
-    
-    list_element.forEach( element => {
 
-      const day = moment( element.date_day ).utc().subtract( 3, "hours" ).format( "dddd" );
-      const id  = element._id;
+    const to_string_dates = list_element.map( date => `${moment(date).utc().format()}` )
+
+    const uniqueDaysWeek = Array.from( new Set( to_string_dates ) );
+
+    const data_to_choose_a_day = uniqueDaysWeek.map( 
+      day_week => ({ 
+        day_week: moment(day_week).utc().format("dddd"),
+        date: day_week
+      }) 
+    );
+
+    data_to_choose_a_day.forEach( element => {
+
+      const id  = element.date;
+      const day = element.day_week;
 
       list_filter.push({
         id: id,
-        title: `Clase: ${element.name_class}`,
-        description: `day: ${element.date_day}`
+        title: day,
+        description: day
       });
       
     });
 
-    Wsp_list ( p_n_id, from, header_data, list_filter );
+    return Wsp_list ( p_n_id, from, header_data, list_filter );
 
   } else {
 
-    Wsp_msg ( p_n_id, process.env.MSG_NO_CLASSES, from );
+    return Wsp_msg ( p_n_id, process.env.MSG_NO_CLASSES, from );
 
   };
   

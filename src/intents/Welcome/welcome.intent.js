@@ -11,6 +11,7 @@
    */
 
 import { Buttons_response, 
+  Wsp_msg, 
   Wsp_reaction 
 } from "../../imports/wsp/wsp.imports";
 
@@ -32,8 +33,15 @@ export const welcome = async ( credentials, emoji ) => {
   const welcome_text          = process.env.MSG_WELCOME_TEXT;
   const welcome_title_classes = process.env.MSG_WELCOME_TITLE_CLASSES;
   const welcome_title_cancel  = process.env.MSG_WELCOME_TITLE_CANCEL;
+  const error_plan_no_classes = process.env.MSG_PLAN_WITHOUT_CLASSES;
 
   Wsp_reaction ( phone_number_id, from, msg_id, emoji );
+
+  if ( get_classes_plan_user == 0 ) {
+    
+    Wsp_msg ( phone_number_id, error_plan_no_classes, from );
+
+  };
 
   // Si el total de clases son igual al cupo ya no puede agendar mas.
   if ( user_classes == get_classes_plan_user ) {
