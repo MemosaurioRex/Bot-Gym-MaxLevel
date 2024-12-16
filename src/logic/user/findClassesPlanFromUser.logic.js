@@ -11,7 +11,7 @@ export const findClassesPlanFromUser  = async ( phone_number ) => {
 
   const plan_data = await PlanModel.find({ user: id_user });
 
-  const totalClass = plan_data[0].totalClass;
+  const totalClass = plan_data[0].countClassTotal;
 
   const return_number = totalClass;
   

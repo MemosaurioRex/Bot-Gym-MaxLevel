@@ -11,6 +11,7 @@ import { Welcome,
   GetDateSearchClassRange,
   FindClassUserCancel,
   GetIdToCancelClass,
+  GetDayToFindClasses,
   GetClassToReserved,
 } from "../imports/intents/intents.import";
 
@@ -36,8 +37,11 @@ export async function DF_CALL ( credentials, from ) {
     if ( find_plan_status_user == true ) {
       
       Message_read ( credentials.phone_number_id, credentials.msg_id );
+
+      console.log("================================");
       console.log( data.action, from );
-  
+      console.log("================================\n");
+
       switch ( data.action ) {
         case "Welcome.action":
           Welcome ( credentials, "👋🏻" );
@@ -54,6 +58,9 @@ export async function DF_CALL ( credentials, from ) {
           GetDateSearchClassRange ( credentials, data );
         break;
         case "Recibe.Dia.Para.Buscar.Clases.action":
+          GetDayToFindClasses ( credentials, data );
+        break;
+        case "Recibe.Clase.Y.Reserva.action":
           GetClassToReserved ( credentials, data );
         break;
   
@@ -63,6 +70,9 @@ export async function DF_CALL ( credentials, from ) {
         break;
         case "Cancela.Clase.Por.Id.action":
           GetIdToCancelClass ( credentials, data );
+        break;
+        case "Recibe.Clase.Y.Reserva.action":
+          
         break;
 
         //? Opcion no valida

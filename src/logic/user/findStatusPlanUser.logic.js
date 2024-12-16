@@ -10,9 +10,14 @@ export const findStatusPlanUser = async ( phone_number ) => {
     
     const data_plan = await PlanModel.find({ user: user_data[0]._id });
 
-    if ( data_plan.length == 1 ) return data_plan[0].status;
+    if ( data_plan.length == 1 ) return data_plan[0].statusPlan;
+    
     return false;
 
-  } catch ( error ) {};
+  } catch ( error ) {
+
+    return false;
+
+  };
 
 };

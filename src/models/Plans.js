@@ -3,7 +3,9 @@ import { Schema, model } from 'mongoose';
 const plans = new Schema({
     totalClass: Number,
     status: Boolean,
-    payment: Number
+    payment: Number,
+    statusPlan: Boolean,
+    countClassTotal: Number
 }, {
     timestamps: true,
     versionKey: false,

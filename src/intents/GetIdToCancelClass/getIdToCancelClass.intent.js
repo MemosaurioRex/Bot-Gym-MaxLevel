@@ -18,13 +18,13 @@ export const getIdToCancelClass = async ( credentials, data ) => {
 
   if ( mongoose.Types.ObjectId.isValid( id_class ) ) {
 
-    // Quita la clase del array usuario.
+    //? Quita la clase del array usuario.
     await UserModel.updateOne (
       { phone: `+${ phone_user }` },
       { $pull: { classes: id_class } }
     );
 
-    // Agrega un cupo mas a la clase por cancelacion.
+    //? Agrega un cupo mas a la clase por cancelacion.
     await ClassesModel.updateOne (
       { _id: id_class },
       { $inc: { countUsers: + 1 } }
