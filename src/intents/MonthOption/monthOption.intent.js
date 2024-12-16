@@ -27,35 +27,70 @@ export const monthOption = async ( credentials, emoji ) => {
   const buttons_list = [];
   const list_options = [];
 
+  // TODO: Filtrar los meses en caso de que solo exista uno con horas.
   if ( get_month.length > 0 ) {
-    
-    for ( let index = 0; index < get_month.length;) {
+
+    if ( get_month.length == 1 ) {
       
-      const month = get_month[index];
-
-      if ( index == 0 ) {
-
-        buttons_list.push({
-          type: "reply",
-          reply: {
-            id: index + 1,
-            title: `${ month } (Actual)`
-          }
-        });
-
+      for ( let index = 0; index < get_month.length;) {
+      
+        const month = get_month[index];
+  
+        if ( index == 0 ) {
+  
+          buttons_list.push({
+            type: "reply",
+            reply: {
+              id: index + 1,
+              title: `${ month } (Actual)`
+            }
+          });
+  
+          index++;
+        };
+  
         index++;
+  
       };
 
-      buttons_list.push({
-        type: "reply",
-        reply: {
-          id: index + 1,
-          title: `${get_month[index]}`
-        }
-      });
+    };
 
-      index++;
-
+    if ( get_month.length == 2 ) {
+      
+      for ( let index = 0; index < get_month.length;) {
+      
+        const month = get_month[index];
+  
+        if ( index == 0 ) {
+  
+          buttons_list.push({
+            type: "reply",
+            reply: {
+              id: index + 1,
+              title: `${ month } (Actual)`
+            }
+          });
+  
+          index++;
+        };
+  
+        if ( index == 1 ) {
+  
+          buttons_list.push({
+            type: "reply",
+            reply: {
+              id: index + 1,
+              title: `${get_month[index]}`
+            }
+          });
+  
+          index++;
+        };
+  
+        index++;
+  
+      };
+      
     };
 
   } else {

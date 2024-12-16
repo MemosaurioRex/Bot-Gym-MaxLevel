@@ -1,6 +1,9 @@
 
 import UserModel    from "../../models/UserCreates";
-import { Wsp_list, Wsp_msg } from "../../imports/wsp/wsp.imports";
+
+import { Wsp_list, 
+  Wsp_msg 
+} from "../../imports/wsp/wsp.imports";
 
 import "../../models/Classes";
 
@@ -34,7 +37,18 @@ export const findClassUserForCancel = async ( credentials ) => {
     find_classes_user.forEach( user => {
 
       if ( user.classes.length > 10 ) {
-        
+
+        for ( let index = 0; index > user.classes.length; index++ ) {
+
+          if ( index < 10 ) {
+
+            return Wsp_list ( phone_number_id, number_user, header_data, classes_user );
+
+          };
+
+        };
+
+        // TODO: Recorrer todas las clases y mostrarlas en diferentes listas.
         return Wsp_msg ( phone_number_id, limit_exceeded, number_user );
 
       } else {
@@ -46,12 +60,11 @@ export const findClassUserForCancel = async ( credentials ) => {
             title: classes.nameClass,
             description: classes.date
           });
-  
+
         });
 
       }
       
-
     });
 
   };

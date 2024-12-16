@@ -9,9 +9,9 @@ import { Welcome,
   Month_option,
   GMS_dates,
   GetDateSearchClassRange,
-  GetDateToFindClasses,
   FindClassUserCancel,
   GetIdToCancelClass,
+  GetClassToReserved,
 } from "../imports/intents/intents.import";
 
 export async function DF_CALL ( credentials, from ) {
@@ -53,8 +53,8 @@ export async function DF_CALL ( credentials, from ) {
         case "Recibe.Fecha.Busca.Clases.Filtra.Dias.action":
           GetDateSearchClassRange ( credentials, data );
         break;
-        case "Recibe.Dia.Busca.Clases.action":
-          GetDateToFindClasses ( credentials, data );
+        case "Recibe.Dia.Para.Buscar.Clases.action":
+          GetClassToReserved ( credentials, data );
         break;
   
         //? Cancelacion de clases

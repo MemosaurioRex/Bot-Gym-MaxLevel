@@ -31,11 +31,15 @@ export const getDateToSearchClassForRange = async( credentials, data ) => {
 
   };
 
+  const titulo = process.env.MSG_LIST_DAYS_TITLE;
+  const cuerpo = process.env.MSG_LIST_DAYS_BODY;
+  const button = process.env.MSG_LIST_DAYS_BUTTON;
+
   const header_data = {
-    titulo: "Clases", 
-    cuerpo: "Pulsa en _Ver clases_ para desplegar la lista con las clases disponibles",
+    titulo, 
+    cuerpo,
     footer: process.env.NOMBRE_ORG, 
-    button: "Ver clases"
+    button
   };
 
   const list_element = [];
@@ -44,12 +48,14 @@ export const getDateToSearchClassForRange = async( credentials, data ) => {
   const last_date_getting  = array.map( index => index.date );
   
   const data_classes = await Classes.find(
+
     { date: { $gte: first_date_getting, $lte: last_date_getting[0] } }
+
   );
 
   data_classes.forEach( hours => {
 
-    list_element.push(hours.date);
+    list_element.push( hours.date );
 
   });
 
@@ -60,28 +66,48 @@ export const getDateToSearchClassForRange = async( credentials, data ) => {
 
   if ( list_element.length > 0 ) {
 
-    const to_string_dates = list_element.map( date => `${moment(date).utc().format()}` )
+    const to_string_dates = list_element.map( date => `${moment( date ).utc().format()}` );
 
     const uniqueDaysWeek = Array.from( new Set( to_string_dates ) );
 
     const data_to_choose_a_day = uniqueDaysWeek.map( 
+
       day_week => ({ 
-        day_week: moment(day_week).utc().format("dddd"),
+
+        day_week: moment( day_week ).utc().format( "dddd" ),
         date: day_week
-      }) 
+
+      })
+
     );
 
-    data_to_choose_a_day.forEach( element => {
+    const uniqueDays = Array.from(
 
-      const id  = element.date;
-      const day = element.day_week;
+      data_to_choose_a_day.reduce((map, curr) => {
 
-      list_filter.push({
-        id: id,
-        title: day,
-        description: day
-      });
+        if (!map.has(curr.day_week)) {
+
+          map.set( curr.day_week, curr );
+
+        };
+
+        return map;
+
+      }, new Map()).values()
+
+    );
+    
+    uniqueDays.forEach( element => {
+
+      const date     = element.date;
+      const day_week = element.day_week
       
+      list_filter.push({
+        id: date,
+        title: day_week,
+        description: day_week
+      });
+
     });
 
     return Wsp_list ( p_n_id, from, header_data, list_filter );

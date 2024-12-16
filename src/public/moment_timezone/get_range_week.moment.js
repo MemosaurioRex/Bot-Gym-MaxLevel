@@ -10,7 +10,7 @@ import ClassesModel from "../../models/Classes";
 export const get_range_week = async ( number_option ) => {
   
   const array = [];
-
+ 
   const number     = parseInt( number_option );
 
   if ( number == 1 ) {
@@ -29,16 +29,15 @@ export const get_range_week = async ( number_option ) => {
 
   array.push({ index: first_date });
 
-  for ( let index = 1; index < 30; ) {
+  for ( let index = 1; index < 40; index++ ) {
 
     if ( number == 1 ) {
 
       if ( moment( first_date ).add( index, "days" ).utc().format("MMMM") == month && 
-          moment( first_date ).add( index, "days" ).utc().format("dddd") === "lunes" ) {
+      moment( first_date ).add( index, "days" ).utc().format("dddd") === "lunes" ) {
 
-          const date_edit = moment( first_date ).add( index, "days" ).utc().format();
-
-          array.push( { index: date_edit} );
+        const date_edit = moment( first_date ).add( index, "days" ).startOf("day").subtract(3, "hours").utc().format();
+        array.push( { index: date_edit } );
 
       };
 
@@ -47,17 +46,15 @@ export const get_range_week = async ( number_option ) => {
     if ( number == 2 ) {
       
       if ( moment( first_date ).add( index, "days" ).utc().format("MMMM") == month && 
-          moment( first_date ).add( index, "days" ).utc().format("dddd") === "lunes" ) {
+        moment( first_date ).add( index, "days" ).utc().format("dddd") === "lunes" ) {
 
-        const date_edit = moment( first_date ).add( index, "days" ).utc().format();
+        const date_edit = moment( first_date ).add( index, "days" ).startOf("day").subtract(3, "hours").utc().format();
 
         array.push( { index: date_edit} );
 
       };
 
     };
-
-    index++;
 
   };
 
@@ -68,7 +65,7 @@ export const get_range_week = async ( number_option ) => {
     const filter = await ClassesModel.find(
       { 
         date: { 
-          $gte: array[index].index,
+          $gte: moment(array[index].index).utc().startOf("day").format(),
           $lte: moment( array[index].index ).utc().endOf( "week" ).format()
         } 
       }
@@ -77,12 +74,6 @@ export const get_range_week = async ( number_option ) => {
     if ( filter.length > 0 ) {
       
       filter_ranges.push( array[index] );
-
-      // console.log('');
-      // console.log( array[index].index );
-      // console.log( moment( array[index].index ).utc().endOf( "week" ).format() );
-      // console.log('');
-      // console.log(filter);
 
     };
 
