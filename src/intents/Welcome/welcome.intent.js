@@ -16,7 +16,8 @@ import { Buttons_response,
 } from "../../imports/wsp/wsp.imports";
 
 import { CountUserClasses, 
-  FindClassesPlanFromUser 
+  FindClassesPlanFromUser, 
+  FindQuotasUser
 } from "../../imports/logic/logic.import";
 
 export const welcome = async ( credentials, emoji ) => {
@@ -29,6 +30,7 @@ export const welcome = async ( credentials, emoji ) => {
 
   const user_classes          = await CountUserClasses ( from );
   const get_classes_plan_user = await FindClassesPlanFromUser ( from );
+  const user_quotas           = await FindQuotasUser ( from );
   
   console.log(`Clases del usuario: ${user_classes}`);
   console.log(`Clases del plan: ${get_classes_plan_user}`);
@@ -46,7 +48,7 @@ export const welcome = async ( credentials, emoji ) => {
 
   };
 
-  //? Si el total de clases son igual al cupo ya no puede agendar mas.
+  //? Si el total de clases son igual al cupo del plan ya no puede agendar mas.
   if ( user_classes == get_classes_plan_user ) {
 
     array.push({
@@ -62,8 +64,8 @@ export const welcome = async ( credentials, emoji ) => {
 
   };
 
-  //? Si el numero de clases es mayor o igual a 1 y menor al total del plan.
-  if ( user_classes >= 1 && user_classes < get_classes_plan_user ) {
+  //? Si el numero de clases es mayor o igual a 1, menor al total del plan y el usuario tiene cupos.
+  if ( user_classes >= 1 && user_classes < get_classes_plan_user && user_quotas > 0 ) {
 
     array.push({
       text: welcome_text,
@@ -84,8 +86,8 @@ export const welcome = async ( credentials, emoji ) => {
 
   };
 
-  //? Si las clases son 0 es que el usuario no tiene clases por ende no puede cancelar.
-  if ( user_classes == 0 ) {
+  //? Si las clases son 0 es que el usuario no tiene clases por ende no puede cancelar y el usuario debe tener cupos.
+  if ( user_classes == 0 && user_quotas > 0 ) {
     
     array.push({
       text: welcome_text,

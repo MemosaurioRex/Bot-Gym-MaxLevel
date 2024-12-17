@@ -46,7 +46,7 @@ export async function DF_CALL ( credentials, from ) {
         case "Welcome.action":
           Welcome ( credentials, "👋🏻" );
         break;
-  
+
         //? Agendacion de clases
         case "Mostrar.Opcion.Meses.Consultar.action":
           Month_option ( credentials, "📅" );
