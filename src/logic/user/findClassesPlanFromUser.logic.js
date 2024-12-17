@@ -16,6 +16,7 @@ export const findClassesPlanFromUser  = async ( phone_number ) => {
   const return_number = totalClass;
   
   if ( Number.isInteger( return_number ) ) return return_number;
+  
   return false;
 
 };

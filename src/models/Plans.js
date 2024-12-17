@@ -2,6 +2,10 @@ import { Schema, model } from 'mongoose';
 
 const plans = new Schema({
     totalClass: Number,
+    user: {
+        type: Schema.Types.ObjectId,
+        ref: "UserCreates"
+    },
     status: Boolean,
     payment: Number,
     statusPlan: Boolean,

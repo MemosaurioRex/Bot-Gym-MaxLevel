@@ -29,7 +29,10 @@ export const welcome = async ( credentials, emoji ) => {
 
   const user_classes          = await CountUserClasses ( from );
   const get_classes_plan_user = await FindClassesPlanFromUser ( from );
-
+  
+  console.log(`Clases del usuario: ${user_classes}`);
+  console.log(`Clases del plan: ${get_classes_plan_user}`);
+  
   const welcome_text          = process.env.MSG_WELCOME_TEXT;
   const welcome_title_classes = process.env.MSG_WELCOME_TITLE_CLASSES;
   const welcome_title_cancel  = process.env.MSG_WELCOME_TITLE_CANCEL;

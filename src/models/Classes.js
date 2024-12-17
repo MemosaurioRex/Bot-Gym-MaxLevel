@@ -10,7 +10,7 @@ const classes = new Schema({
     startDate: Date,
     endDate: Date,
     status: Boolean,
-    quotaCount: Number,
+    countUsers: Number,
     day: String,
 }, {
     timestamps: true,

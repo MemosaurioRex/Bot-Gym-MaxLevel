@@ -11,10 +11,6 @@ const userCreates = new Schema({
   classes: {
     type: Schema.Types.Array,
     ref: "Classes"
-  },
-  plan: {
-    type: Schema.Types.ObjectId,
-    ref: "Plans"
   }
 }, {
     timestamps: true,
