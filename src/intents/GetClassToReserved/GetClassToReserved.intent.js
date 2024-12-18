@@ -44,14 +44,19 @@ export const getClassToReserved = async ( credentials, data ) => {
   
         const data_user = await FindUserByNumber ( from );
         const id_user = data_user._id;
-  
-        // TODO: El cupo que se use aqui debe estar disponible (Hacer hoy)
+ 
+        const find_quota = await QuotaModel.find({ 
+          user: id_user, 
+          status: true 
+        });
+
         //? Se usa un cupo del usuario
-        await QuotaModel.updateOne (
-          { user: id_user },
-          { status: false }
+        await QuotaModel.findByIdAndUpdate (
+          find_quota[0]._id,{
+            status: false
+          }
         );
-  
+
         return Wsp_msg ( phone_number_id, class_successful, from );
         
       } catch ( error ) {

@@ -51,7 +51,7 @@ export const getDayToFindClasses = async ( credentials, data ) => {
   
         id: element._id,
         title: element.nameClass,
-        description: ""
+        description: element._id
   
       });
   

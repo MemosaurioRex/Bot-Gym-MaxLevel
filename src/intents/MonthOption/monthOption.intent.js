@@ -1,4 +1,3 @@
-// TODO: Hay que ver si los meses cuentan con horas.
 
 import { Buttons_response, Wsp_msg, Wsp_reaction } from "../../imports/wsp/wsp.imports";
 
@@ -32,7 +31,6 @@ export const monthOption = async ( credentials, emoji ) => {
     const buttons_list = [];
     const list_options = [];
 
-    // TODO: Filtrar los meses en caso de que solo exista uno con horas.
     if ( get_month.length > 0 ) {
 
       if ( get_month.length == 1 ) {

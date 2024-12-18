@@ -71,9 +71,6 @@ export async function DF_CALL ( credentials, from ) {
         case "Cancela.Clase.Por.Id.action":
           GetIdToCancelClass ( credentials, data );
         break;
-        case "Recibe.Clase.Y.Reserva.action":
-          
-        break;
 
         //? Opcion no valida
         case "input.unknown.action":
