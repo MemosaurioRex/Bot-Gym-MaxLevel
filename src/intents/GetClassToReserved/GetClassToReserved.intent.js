@@ -21,7 +21,7 @@ export const getClassToReserved = async ( credentials, data ) => {
 
   const user_quotas    = await FindQuotasUser ( from );
   const quotas_expires = process.env.MSG_QUOTAS_EXPIRES;
-
+  // console.log(user_quotas);
   if ( user_quotas > 0 ) {
     
     if ( mongoose.Types.ObjectId.isValid( id_class ) ) {
@@ -43,7 +43,7 @@ export const getClassToReserved = async ( credentials, data ) => {
         );
   
         const data_user = await FindUserByNumber ( from );
-        const id_user = data_user._id;
+        const id_user = data_user[0]._id;
  
         const find_quota = await QuotaModel.find({ 
           user: id_user, 

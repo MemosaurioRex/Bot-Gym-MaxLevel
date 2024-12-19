@@ -32,7 +32,7 @@ export async function DF_CALL ( credentials, from ) {
   const find_plan_status_user = await FindStatusPlanUser ( user_number );
 
   //? Usuario registrado?
-  if ( find_user_register.length == 1 ) {
+  if ( find_user_register.length > 0 ) {
     //? Plan activo?
     if ( find_plan_status_user == true ) {
       

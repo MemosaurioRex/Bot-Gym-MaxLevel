@@ -1,6 +1,7 @@
 
 import moment from "moment-timezone";
 import ClassesModel from "../../models/Classes";
+moment.locale('es');
 
 /**
  * TODO: Mejorar esta logica ya que se detiene el for manualmente.
@@ -11,7 +12,7 @@ export const get_range_week = async ( number_option ) => {
   
   const array = [];
  
-  const number     = parseInt( number_option );
+  const number = parseInt( number_option );
 
   if ( number == 1 ) {
 
@@ -37,6 +38,7 @@ export const get_range_week = async ( number_option ) => {
       moment( first_date ).add( index, "days" ).utc().format("dddd") === "lunes" ) {
 
         const date_edit = moment( first_date ).add( index, "days" ).startOf("day").subtract(3, "hours").utc().format();
+
         array.push( { index: date_edit } );
 
       };
@@ -48,7 +50,8 @@ export const get_range_week = async ( number_option ) => {
       if ( moment( first_date ).add( index, "days" ).utc().format("MMMM") == month && 
         moment( first_date ).add( index, "days" ).utc().format("dddd") === "lunes" ) {
 
-        const date_edit = moment( first_date ).add( index, "days" ).startOf("day").subtract(3, "hours").utc().format();
+        //? A diferencia del de arriba, hay que sumarle un dia porque sino inicia los domingos
+        const date_edit = moment( first_date ).add( index, "days" ).add(1, "day").subtract(3, "hours").utc().format();
 
         array.push( { index: date_edit} );
 
@@ -72,7 +75,7 @@ export const get_range_week = async ( number_option ) => {
     );
 
     if ( filter.length > 0 ) {
-      
+
       filter_ranges.push( array[index] );
 
     };

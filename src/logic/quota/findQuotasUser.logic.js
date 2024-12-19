@@ -6,6 +6,7 @@ import moment from "moment";
 export const findQuotasUser = async ( phone_number ) => {
 
   const user_data     = await UserModel.findOne({ phone: `+${phone_number}` });
+
   const quotas_status = await QuotaModel.find({});
 
   const current_date = moment().subtract( 3, "hours" ).utc().format();

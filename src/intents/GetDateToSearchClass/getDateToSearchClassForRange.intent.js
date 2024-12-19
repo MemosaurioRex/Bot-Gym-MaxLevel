@@ -56,19 +56,19 @@ export const getDateToSearchClassForRange = async( credentials, data ) => {
 
     const first_date_getting = moment( date_getting ).add( 3, "hours" ).utc().format();
     const last_date_getting  = array.map( index => index.date );
-    
+
     const data_classes = await Classes.find(
 
       { date: { $gte: first_date_getting, $lte: last_date_getting[0] } }
 
     );
-
+    console.log(data_classes);
     data_classes.forEach( hours => {
 
       list_element.push( hours.date );
 
     });
-
+  
     const list_filter = [];
 
     if ( list_element.length > 0 ) {

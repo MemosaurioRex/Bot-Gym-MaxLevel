@@ -31,9 +31,10 @@ export const welcome = async ( credentials, emoji ) => {
   const user_classes          = await CountUserClasses ( from );
   const get_classes_plan_user = await FindClassesPlanFromUser ( from );
   const user_quotas           = await FindQuotasUser ( from );
-  
+
   console.log(`Clases del usuario: ${user_classes}`);
   console.log(`Clases del plan: ${get_classes_plan_user}`);
+  console.log(`Cuotas del usuario: ${user_quotas}`);
   
   const welcome_text          = process.env.MSG_WELCOME_TEXT;
   const welcome_title_classes = process.env.MSG_WELCOME_TITLE_CLASSES;
@@ -48,7 +49,7 @@ export const welcome = async ( credentials, emoji ) => {
 
   };
 
-  //? Si el total de clases son igual al cupo del plan ya no puede agendar mas.
+  //? Si el total de clases es menor al cupo del plan ya no puede agendar mas.
   if ( user_classes == get_classes_plan_user ) {
 
     array.push({
@@ -65,7 +66,7 @@ export const welcome = async ( credentials, emoji ) => {
   };
 
   //? Si el numero de clases es mayor o igual a 1, menor al total del plan y el usuario tiene cupos.
-  if ( user_classes >= 1 && user_classes < get_classes_plan_user && user_quotas > 0 ) {
+  if ( user_classes < get_classes_plan_user && user_quotas > 0 ) {
 
     array.push({
       text: welcome_text,
@@ -102,10 +103,10 @@ export const welcome = async ( credentials, emoji ) => {
   
   };
 
-  if ( array.length == 1 ) {
+  if ( array.length > 0 ) {
     
     return Buttons_response ( phone_number_id, from, array );
 
   };
-  
+
 };
